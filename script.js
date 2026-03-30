@@ -4,12 +4,16 @@
 const SMARTSHEET_API_TOKEN = 'PH2JCA2pi206Ba7XuKXmoeTSyGuomFyQnr25r'; // Replace with your Smartsheet API token
 const SHEET_ID = '5638471382159236'; // Your Shipping Quotes Sheet ID
 
+// CORS Proxy to bypass browser restrictions
+const CORS_PROXY = 'https://corsproxy.io/?';
+
 // ============================================
 // FETCH DATA FROM SMARTSHEET
 // ============================================
 async function fetchSheetData() {
     try {
-        const response = await fetch(`https://api.smartsheet.com/2.0/sheets/${SHEET_ID}`, {
+        const apiUrl = `https://api.smartsheet.com/2.0/sheets/${SHEET_ID}`;
+        const response = await fetch(CORS_PROXY + encodeURIComponent(apiUrl), {
             headers: {
                 'Authorization': `Bearer ${SMARTSHEET_API_TOKEN}`,
                 'Content-Type': 'application/json'
