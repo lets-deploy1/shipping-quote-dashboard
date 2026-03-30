@@ -1,7 +1,7 @@
 // ============================================
 // CONFIGURATION - ADD YOUR API TOKEN HERE
 // ============================================
-const SMARTSHEET_API_TOKEN = 'YOUR_API_TOKEN_HERE'; // Replace with your Smartsheet API token
+const SMARTSHEET_API_TOKEN = 'PH2JCA2pi206Ba7XuKXmoeTSyGuomFyQnr25r'; // Replace with your Smartsheet API token
 const SHEET_ID = '5638471382159236'; // Your Shipping Quotes Sheet ID
 
 // ============================================
