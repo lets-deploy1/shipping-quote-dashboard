@@ -200,29 +200,40 @@ function filterEvents(events) {
     const fromDate = dateFrom.value ? new Date(dateFrom.value) : null;
     const toDate = dateTo.value ? new Date(dateTo.value) : null;
     const kitValue = kitFilter.value;
-    const searchTerm = searchInput.value.toLowerCase();
+    const searchTerm = searchInput.value.toLowerCase().trim();
     
     return events.filter(event => {
-        const eventDate = new Date(event['QUOTE DATE']);
+        // Kit filter - apply first (simpler)
         const eventKit = String(event['KIT NUMBER'] || '1');
-        const eventText = Object.values(event).join(' ').toLowerCase();
-        
-        // Date filter
-        if (fromDate && eventDate < fromDate) return false;
-        if (toDate && eventDate > toDate) return false;
-        
-        // Kit filter
         if (kitValue !== 'all' && eventKit !== kitValue) return false;
         
-        // Search filter
-        if (searchTerm && !eventText.includes(searchTerm)) return false;
+        // Search filter - only apply if search term exists
+        if (searchTerm && searchTerm.length > 0) {
+            const eventText = Object.values(event).join(' ').toLowerCase();
+            if (!eventText.includes(searchTerm)) return false;
+        }
+        
+        // Date filter - only apply if both date inputs have values
+        const eventDateStr = event['QUOTE DATE'];
+        if (!eventDateStr) return true; // Show events without dates
+        
+        const eventDate = new Date(eventDateStr);
+        if (isNaN(eventDate)) return true; // Show events with invalid dates
+        
+        // Only apply date filtering if we have valid filter dates
+        if (fromDate && !isNaN(fromDate.getTime())) {
+            if (eventDate < fromDate) return false;
+        }
+        if (toDate && !isNaN(toDate.getTime())) {
+            if (eventDate > toDate) return false;
+        }
         
         return true;
     });
 }
 
 // ============================================
-// INITIALIZE DASHBOARD
+// INITIALIZE DASHBOARD (SINGLE LISTENER)
 // ============================================
 document.addEventListener('DOMContentLoaded', async function() {
     const dateFrom = document.getElementById('date-from');
@@ -230,9 +241,22 @@ document.addEventListener('DOMContentLoaded', async function() {
     const kitFilter = document.getElementById('kit-filter');
     const searchInput = document.getElementById('search');
     
+    // Set default date range (last 30 days to 90 days ahead)
+    const today = new Date();
+    const thirtyDaysAgo = new Date(today);
+    thirtyDaysAgo.setDate(today.getDate() - 30);
+    const ninetyDaysAhead = new Date(today);
+    ninetyDaysAhead.setDate(today.getDate() + 90);
+    
+    dateFrom.value = thirtyDaysAgo.toISOString().split('T')[0];
+    dateTo.value = ninetyDaysAhead.toISOString().split('T')[0];
+    
     // Fetch and render initial data
     const allEvents = await fetchSheetData();
-    renderEvents(allEvents);
+    
+    // Apply initial filter with default dates
+    const filteredEvents = filterEvents(allEvents);
+    renderEvents(filteredEvents);
     
     // Add filter event listeners
     dateFrom.addEventListener('change', () => renderEvents(filterEvents(allEvents)));
