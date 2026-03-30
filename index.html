@@ -15,10 +15,10 @@
         </div>
         <div class="filters">
             <div class="filter-group">
-                <label for="date-filter">Show Events From:</label>
-                <input type="date" id="date-from" value="2026-04-01">
+                <label for="date-from">Arrival Date From:</label>
+                <input type="date" id="date-from">
                 <span>to</span>
-                <input type="date" id="date-to" value="2026-06-30">
+                <input type="date" id="date-to">
             </div>
             <div class="filter-group">
                 <label for="kit-filter">Kit Number:</label>
@@ -29,247 +29,23 @@
                 </select>
             </div>
             <div class="filter-group">
-                <label for="search">Search Destination:</label>
-                <input type="text" id="search" placeholder="City or ZIP...">
+                <label for="search">Search:</label>
+                <input type="text" id="search" placeholder="Event ID, City, ZIP...">
             </div>
         </div>
     </header>
 
     <main>
         <div class="summary-bar">
-            <span id="event-count">8 Events</span>
-            <span id="last-updated">Last Updated: March 27, 2026 at 4:32 PM</span>
+            <span id="event-count">Loading...</span>
+            <span id="last-updated">Last Updated: --</span>
         </div>
 
         <div class="events-container" id="events-container">
-            <!-- Event Card 1 -->
-            <div class="event-card" data-kit="1" data-date="2026-04-15">
-                <div class="event-header">
-                    <div class="event-id">EVENT ID: <strong>03226015</strong></div>
-                    <div class="kit-badge kit-1">KIT #1</div>
-                    <div class="event-date">April 15, 2026</div>
-                </div>
-                
-                <div class="destinations">
-                    <div class="destination-box">
-                        <h3>Destination</h3>
-                        <p class="location-name">Tujague's Restaurant</p>
-                        <p class="location-address">429 Decatur St</p>
-                        <p class="location-city">New Orleans, LA 70130</p>
-                    </div>
-                    <div class="arrow">→</div>
-                    <div class="destination-box">
-                        <h3>Return Destination</h3>
-                        <p class="location-name">Leading Edge Training</p>
-                        <p class="location-address">307 Hillview Drive</p>
-                        <p class="location-city">Nazareth, PA 18064</p>
-                    </div>
-                </div>
-
-                <div class="package-info">
-                    <span><strong>Weight:</strong> 40 lbs</span>
-                    <span><strong>Dimensions:</strong> 26" x 20" x 20"</span>
-                </div>
-
-                <div class="rates-container">
-                    <div class="rates-column">
-                        <h4>Outbound Rates</h4>
-                        <table class="rates-table">
-                            <tr><td>FedEx Ground</td><td>$64.75</td></tr>
-                            <tr><td>FedEx Express Saver</td><td>$249.21</td></tr>
-                            <tr><td>FedEx 2Day</td><td>$369.01</td></tr>
-                            <tr><td>FedEx 2Day AM</td><td>$422.28</td></tr>
-                            <tr><td>FedEx Standard Overnight</td><td>$439.85</td></tr>
-                            <tr><td>FedEx Priority Overnight</td><td>$468.40</td></tr>
-                            <tr><td>FedEx First Overnight</td><td>$597.13</td></tr>
-                        </table>
-                    </div>
-                    <div class="rates-column">
-                        <h4>Return Rates</h4>
-                        <table class="rates-table">
-                            <tr><td>FedEx Ground</td><td>$58.50</td></tr>
-                            <tr><td>FedEx Express Saver</td><td>$230.00</td></tr>
-                            <tr><td>FedEx 2Day</td><td>$342.00</td></tr>
-                            <tr><td>FedEx 2Day AM</td><td>$390.00</td></tr>
-                            <tr><td>FedEx Standard Overnight</td><td>$405.00</td></tr>
-                            <tr><td>FedEx Priority Overnight</td><td>$425.00</td></tr>
-                            <tr><td>FedEx First Overnight</td><td>$545.00</td></tr>
-                        </table>
-                    </div>
-                </div>
+            <!-- Events will be loaded here by JavaScript -->
+            <div class="no-events">
+                <p>Loading shipping quotes...</p>
             </div>
-
-            <!-- Event Card 2 -->
-            <div class="event-card" data-kit="2" data-date="2026-04-18">
-                <div class="event-header">
-                    <div class="event-id">EVENT ID: <strong>03226016</strong></div>
-                    <div class="kit-badge kit-2">KIT #2</div>
-                    <div class="event-date">April 18, 2026</div>
-                </div>
-                
-                <div class="destinations">
-                    <div class="destination-box">
-                        <h3>Destination</h3>
-                        <p class="location-name">Grand Hyatt Seattle</p>
-                        <p class="location-address">721 Pine Street</p>
-                        <p class="location-city">Seattle, WA 98101</p>
-                    </div>
-                    <div class="arrow">→</div>
-                    <div class="destination-box">
-                        <h3>Return Destination</h3>
-                        <p class="location-name">Leading Edge Training</p>
-                        <p class="location-address">307 Hillview Drive</p>
-                        <p class="location-city">Nazareth, PA 18064</p>
-                    </div>
-                </div>
-
-                <div class="package-info">
-                    <span><strong>Weight:</strong> 45 lbs</span>
-                    <span><strong>Dimensions:</strong> 28" x 22" x 22"</span>
-                </div>
-
-                <div class="rates-container">
-                    <div class="rates-column">
-                        <h4>Outbound Rates</h4>
-                        <table class="rates-table">
-                            <tr><td>FedEx Ground</td><td>$89.50</td></tr>
-                            <tr><td>FedEx Express Saver</td><td>$312.45</td></tr>
-                            <tr><td>FedEx 2Day</td><td>$425.00</td></tr>
-                            <tr><td>FedEx 2Day AM</td><td>$489.00</td></tr>
-                            <tr><td>FedEx Standard Overnight</td><td>$512.00</td></tr>
-                            <tr><td>FedEx Priority Overnight</td><td>$545.00</td></tr>
-                            <tr><td>FedEx First Overnight</td><td>$698.00</td></tr>
-                        </table>
-                    </div>
-                    <div class="rates-column">
-                        <h4>Return Rates</h4>
-                        <table class="rates-table">
-                            <tr><td>FedEx Ground</td><td>$85.00</td></tr>
-                            <tr><td>FedEx Express Saver</td><td>$295.00</td></tr>
-                            <tr><td>FedEx 2Day</td><td>$398.00</td></tr>
-                            <tr><td>FedEx 2Day AM</td><td>$456.00</td></tr>
-                            <tr><td>FedEx Standard Overnight</td><td>$480.00</td></tr>
-                            <tr><td>FedEx Priority Overnight</td><td>$510.00</td></tr>
-                            <tr><td>FedEx First Overnight</td><td>$650.00</td></tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Event Card 3 -->
-            <div class="event-card" data-kit="1" data-date="2026-04-22">
-                <div class="event-header">
-                    <div class="event-id">EVENT ID: <strong>03226017</strong></div>
-                    <div class="kit-badge kit-1">KIT #1</div>
-                    <div class="event-date">April 22, 2026</div>
-                </div>
-                
-                <div class="destinations">
-                    <div class="destination-box">
-                        <h3>Destination</h3>
-                        <p class="location-name">Miami Convention Center</p>
-                        <p class="location-address">1901 Convention Center Dr</p>
-                        <p class="location-city">Miami, FL 33139</p>
-                    </div>
-                    <div class="arrow">→</div>
-                    <div class="destination-box">
-                        <h3>Return Destination</h3>
-                        <p class="location-name">Leading Edge Training</p>
-                        <p class="location-address">307 Hillview Drive</p>
-                        <p class="location-city">Nazareth, PA 18064</p>
-                    </div>
-                </div>
-
-                <div class="package-info">
-                    <span><strong>Weight:</strong> 40 lbs</span>
-                    <span><strong>Dimensions:</strong> 26" x 20" x 20"</span>
-                </div>
-
-                <div class="rates-container">
-                    <div class="rates-column">
-                        <h4>Outbound Rates</h4>
-                        <table class="rates-table">
-                            <tr><td>FedEx Ground</td><td>$72.30</td></tr>
-                            <tr><td>FedEx Express Saver</td><td>$268.00</td></tr>
-                            <tr><td>FedEx 2Day</td><td>$385.00</td></tr>
-                            <tr><td>FedEx 2Day AM</td><td>$445.00</td></tr>
-                            <tr><td>FedEx Standard Overnight</td><td>$465.00</td></tr>
-                            <tr><td>FedEx Priority Overnight</td><td>$495.00</td></tr>
-                            <tr><td>FedEx First Overnight</td><td>$625.00</td></tr>
-                        </table>
-                    </div>
-                    <div class="rates-column">
-                        <h4>Return Rates</h4>
-                        <table class="rates-table">
-                            <tr><td>FedEx Ground</td><td>$68.00</td></tr>
-                            <tr><td>FedEx Express Saver</td><td>$250.00</td></tr>
-                            <tr><td>FedEx 2Day</td><td>$360.00</td></tr>
-                            <tr><td>FedEx 2Day AM</td><td>$415.00</td></tr>
-                            <tr><td>FedEx Standard Overnight</td><td>$435.00</td></tr>
-                            <tr><td>FedEx Priority Overnight</td><td>$462.00</td></tr>
-                            <tr><td>FedEx First Overnight</td><td>$585.00</td></tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Event Card 4 -->
-            <div class="event-card" data-kit="2" data-date="2026-05-01">
-                <div class="event-header">
-                    <div class="event-id">EVENT ID: <strong>03226018</strong></div>
-                    <div class="kit-badge kit-2">KIT #2</div>
-                    <div class="event-date">May 1, 2026</div>
-                </div>
-                
-                <div class="destinations">
-                    <div class="destination-box">
-                        <h3>Destination</h3>
-                        <p class="location-name">Denver Tech Center</p>
-                        <p class="location-address">7007 E. Belleview Ave</p>
-                        <p class="location-city">Denver, CO 80224</p>
-                    </div>
-                    <div class="arrow">→</div>
-                    <div class="destination-box">
-                        <h3>Return Destination</h3>
-                        <p class="location-name">Leading Edge Training</p>
-                        <p class="location-address">307 Hillview Drive</p>
-                        <p class="location-city">Nazareth, PA 18064</p>
-                    </div>
-                </div>
-
-                <div class="package-info">
-                    <span><strong>Weight:</strong> 45 lbs</span>
-                    <span><strong>Dimensions:</strong> 28" x 22" x 22"</span>
-                </div>
-
-                <div class="rates-container">
-                    <div class="rates-column">
-                        <h4>Outbound Rates</h4>
-                        <table class="rates-table">
-                            <tr><td>FedEx Ground</td><td>$78.25</td></tr>
-                            <tr><td>FedEx Express Saver</td><td>$289.00</td></tr>
-                            <tr><td>FedEx 2Day</td><td>$398.00</td></tr>
-                            <tr><td>FedEx 2Day AM</td><td>$462.00</td></tr>
-                            <tr><td>FedEx Standard Overnight</td><td>$485.00</td></tr>
-                            <tr><td>FedEx Priority Overnight</td><td>$518.00</td></tr>
-                            <tr><td>FedEx First Overnight</td><td>$662.00</td></tr>
-                        </table>
-                    </div>
-                    <div class="rates-column">
-                        <h4>Return Rates</h4>
-                        <table class="rates-table">
-                            <tr><td>FedEx Ground</td><td>$74.00</td></tr>
-                            <tr><td>FedEx Express Saver</td><td>$272.00</td></tr>
-                            <tr><td>FedEx 2Day</td><td>$375.00</td></tr>
-                            <tr><td>FedEx 2Day AM</td><td>$432.00</td></tr>
-                            <tr><td>FedEx Standard Overnight</td><td>$455.00</td></tr>
-                            <tr><td>FedEx Priority Overnight</td><td>$485.00</td></tr>
-                            <tr><td>FedEx First Overnight</td><td>$620.00</td></tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </main>
 

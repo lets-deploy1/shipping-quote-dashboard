@@ -92,36 +92,44 @@ function createEventCard(event) {
     const card = document.createElement('div');
     card.className = 'event-card';
     card.dataset.kit = event['KIT NUMBER'] || '1';
-    card.dataset.date = event['QUOTE DATE'] || '';
+    card.dataset.date = event['ARRIVAL DATE'] || '';
     
     const kitClass = event['KIT NUMBER'] === '2' ? 'kit-2' : 'kit-1';
+    
+    // Combine dimensions into single string
+    const dimensions = formatDimensions(event['LENGTH'], event['WIDTH'], event['HEIGHT']);
     
     card.innerHTML = `
         <div class="event-header">
             <div class="event-id">EVENT ID: <strong>${event['EVENT ID'] || 'N/A'}</strong></div>
             <div class="kit-badge ${kitClass}">KIT #${event['KIT NUMBER'] || '1'}</div>
-            <div class="event-date">${formatDate(event['QUOTE DATE'])}</div>
+            <div class="event-date">${formatDate(event['ARRIVAL DATE'])}</div>
         </div>
         
         <div class="destinations">
             <div class="destination-box">
                 <h3>Destination</h3>
-                <p class="location-name">${event['DESTINATION NAME'] || 'N/A'}</p>
-                <p class="location-address">${event['DESTINATION ADDRESS'] || ''}</p>
-                <p class="location-city">${event['DESTINATION CITY'] || ''}, ${event['DESTINATION STATE'] || ''} ${event['DESTINATION ZIP'] || ''}</p>
+                <p class="location-name">${event['NAME-BUSINESS'] || 'N/A'}</p>
+                <p class="location-address">${event['STREET ADDRESS'] || ''}</p>
+                <p class="location-city">${event['CITY'] || ''}, ${event['STATE'] || ''} ${event['ZIP CODE'] || ''}</p>
             </div>
             <div class="arrow">→</div>
             <div class="destination-box">
                 <h3>Return Destination</h3>
-                <p class="location-name">${event['RETURN TO NAME'] || 'N/A'}</p>
-                <p class="location-address">${event['RETURN TO ADDRESS'] || ''}</p>
-                <p class="location-city">${event['RETURN TO CITY'] || ''}, ${event['RETURN TO STATE'] || ''} ${event['RETURN TO ZIP'] || ''}</p>
+                <p class="location-name">${event['RETURN NAME-BUSINESS'] || 'N/A'}</p>
+                <p class="location-address">${event['RETURN STREET ADDRESS'] || ''}</p>
+                <p class="location-city">${event['RETURN CITY'] || ''}, ${event['RETURN STATE'] || ''} ${event['RETURN ZIP CODE'] || ''}</p>
             </div>
+        </div>
+
+        <div class="dates-info">
+            <span><strong>Arrival:</strong> ${formatDate(event['ARRIVAL DATE'])}</span>
+            <span><strong>Return:</strong> ${formatDate(event['RETURN DATE'])}</span>
         </div>
 
         <div class="package-info">
             <span><strong>Weight:</strong> ${event['WEIGHT'] || 'N/A'} lbs</span>
-            <span><strong>Dimensions:</strong> ${event['DIMENSIONS'] || 'N/A'}</span>
+            <span><strong>Dimensions:</strong> ${dimensions}</span>
         </div>
 
         <div class="rates-container">
@@ -164,12 +172,20 @@ function formatDate(dateStr) {
         const date = new Date(dateStr);
         return date.toLocaleDateString('en-US', { 
             year: 'numeric', 
-            month: 'long', 
+            month: 'short', 
             day: 'numeric' 
         });
     } catch {
         return dateStr;
     }
+}
+
+function formatDimensions(length, width, height) {
+    if (!length && !width && !height) return 'N/A';
+    const l = length || '?';
+    const w = width || '?';
+    const h = height || '?';
+    return `${l} × ${w} × ${h}`;
 }
 
 function formatRate(value) {
@@ -213,8 +229,8 @@ function filterEvents(events) {
             if (!eventText.includes(searchTerm)) return false;
         }
         
-        // Date filter - only apply if both date inputs have values
-        const eventDateStr = event['QUOTE DATE'];
+        // Date filter - use ARRIVAL DATE
+        const eventDateStr = event['ARRIVAL DATE'];
         if (!eventDateStr) return true; // Show events without dates
         
         const eventDate = new Date(eventDateStr);

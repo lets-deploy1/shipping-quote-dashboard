@@ -196,6 +196,18 @@ main {
     color: #cbd5e0;
 }
 
+/* Dates Info */
+.dates-info {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 10px 20px;
+    background: #f0f7ff;
+    border-top: 1px solid #e2e8f0;
+    font-size: 13px;
+    color: #666;
+}
+
 /* Package Info */
 .package-info {
     display: flex;
@@ -203,7 +215,6 @@ main {
     gap: 30px;
     padding: 10px 20px;
     background: #fafafa;
-    border-top: 1px solid #e2e8f0;
     border-bottom: 1px solid #e2e8f0;
     font-size: 13px;
     color: #666;
